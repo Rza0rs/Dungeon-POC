@@ -65,8 +65,20 @@ def playerCreate():
                                                   item3 = 'none')
             playerEquippedWeapons = classes.equippedWeapons(type = weapons,
                                                             primary  = items.hw0001)
-            playerEquippedArmour = classes.equippedArmour()
-
+            playerEquippedArmour = classes.equippedArmour(type = armour,
+                                                          armour = items.ha0001)
+            playerEquippedAccessories = classes.equippedAccessories(type = accessories,
+                                                                    acc1 = items.ac0001,
+                                                                    acc2 = 'none',
+                                                                    acc3 = 'none',
+                                                                    acc4 = 'none')
+            playerEquippedItems = classes.beltItems(type = items,
+                                                    pouch1 = items.it0001,
+                                                    pouch2 = 'none',
+                                                    pouch3='none',
+                                                    pouch4='none',
+                                                    pouch5='none',
+                                                    pouch6='none',)
             break
         elif subclassInput == 'thief':
             player = classes.pc(name=nameInput,
@@ -97,7 +109,22 @@ def playerCreate():
                                                   item1 = items.it0002,
                                                   item2 = 'none',
                                                   item3 = 'none')
-
+            playerEquippedWeapons = classes.equippedWeapons(type = weapons,
+                                                            primary  = items.lw0001)
+            playerEquippedArmour = classes.equippedArmour(type = armour,
+                                                          armour = items.la0001)
+            playerEquippedAccessories = classes.equippedAccessories(type = accessories,
+                                                                    acc1 = items.ac0002,
+                                                                    acc2 = 'none',
+                                                                    acc3 = 'none',
+                                                                    acc4 = 'none')
+            playerEquippedItems = classes.beltItems(type = items,
+                                                    pouch1 = items.it0002,
+                                                    pouch2 = 'none',
+                                                    pouch3='none',
+                                                    pouch4='none',
+                                                    pouch5='none',
+                                                    pouch6='none',)
             break
         elif subclassInput == 'mage':
             player = classes.pc(name=nameInput,
@@ -127,6 +154,22 @@ def playerCreate():
                                                   item1 = items.it0002,
                                                   item2 = 'none',
                                                   item3 = 'none')
+            playerEquippedWeapons = classes.equippedWeapons(type = weapons,
+                                                            primary  = items.mw0001)
+            playerEquippedArmour = classes.equippedArmour(type = armour,
+                                                          armour = items.cl0001)
+            playerEquippedAccessories = classes.equippedAccessories(type = accessories,
+                                                                    acc1 = items.ac0003,
+                                                                    acc2 = 'none',
+                                                                    acc3 = 'none',
+                                                                    acc4 = 'none')
+            playerEquippedItems = classes.beltItems(type = items,
+                                                    pouch1 = items.it0002,
+                                                    pouch2 = 'none',
+                                                    pouch3='none',
+                                                    pouch4='none',
+                                                    pouch5='none',
+                                                    pouch6='none',)
             break
         else:
             print('You became confused, gather your thoughts')

@@ -64,29 +64,26 @@ class equippedWeapons(inventory):
         eweaponString = " ".join([str(i) for i in eweaponStats])
 
 class equippedArmour(inventory):
-    def __init__(self, type, helm, chest, arms, boots):
-        self.helm = helm
-        self.chest = chest
-        self.arms = arms
-        self. boots = boots
+    def __init__(self, type, armour):
+        self.armour = armour
         super().__init__(type)
 
     def encodeequippedArmour(self):
         global earmourString
-        earmourStats = [self.helm, self.chest, self.arms, self.boots]
+        earmourStats = [self.armour]
         earmourString = " ".join([str(i) for i in earmourStats])
 
 class equippedAccessories(inventory):
-    def __init__(self, type, ring1, ring2, ring3, ring4):
-        self.ring1 = ring1
-        self.ring2 = ring2
-        self.ring3 = ring3
-        self.ring4 = ring4
+    def __init__(self, type, acc1, acc2, acc3, acc4):
+        self.acc1 = acc1
+        self.acc2 = acc2
+        self.acc3 = acc3
+        self.acc4 = acc4
         super().__init__(type)
 
     def encodeequippedAccessories(self):
         global accString
-        accStats = [self.ring1, self.ring2, self.ring3, self.ring4]
+        accStats = [self.acc1, self.acc2, self.acc3, self.acc4]
         accString = " ".join([str(i) for i in accStats])
 
 class beltItems(inventory):

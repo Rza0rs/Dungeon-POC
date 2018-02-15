@@ -1,1 +1,1 @@
-Aiden knight 1 150 100 15 5 2 n (0, 0)
+Aiden thief 1 100 150 5 15 4 n (0, 0)
