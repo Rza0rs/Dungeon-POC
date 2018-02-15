@@ -188,11 +188,33 @@ class clothing(apparel):
 #=============================================================================================
 #Accessories==================================================================================
 class accessories(item):
-    'items'
+    'accessories'
     def __init__(self, ID, name, weight, value, desc, accClass, statEffect):
+        self.accClass = accClass
+        self.statEffect = statEffect
         super().__init__( ID, name, weight, value, desc)
-    def accessoryStats(selfself):
-        print('Name -', self.name):
+    def accessoryStats(self):
+        print('Name -', self.name)
+        print('Weight -', self.weight)
+        print('Value -', self.value)
+        print('Descripton -', self.desc)
+        print('Class -', self.accClass)
+        print('Defense -', self.statEffect)
+
+#=============================================================================================
+#Items========================================================================================
+class items(item):
+    'items'
+    def __init__(self, ID, name, weight, value, desc, effect):
+        self.effect = effect
+        super().__init__(ID, name, weight, value, desc)
+    def itemStats(self):
+        print('Name -', self.name)
+        print('Weight -', self.weight)
+        print('Value -', self.value)
+        print('Descripton -', self.desc)
+        print('Class -', self.effect)
+
 #=============================================================================================
 #actor classes================================================================================
 class actor():

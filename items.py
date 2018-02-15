@@ -1,5 +1,5 @@
 import classes
-#Armour======================================================================
+#Armour=======================================================================
 ha0001 = classes.heavyArmour(ID = 'ha0001',
                              name = 'Iron Armor',
                              weight = 10,
@@ -65,4 +65,46 @@ mw0001 = classes.magicWeapon(ID = 'mw0001',
                              DexReq = 4,
                              IntReq = 0)
 #Accessories==================================================================
-Ac0001 = classes.
+ac0001 = classes.accessories(ID = 'ac0001',
+                             name = 'ruby ring',
+                             weight = 1,
+                             value = 500,
+                             desc = 'a silver ring with a ruby inside',
+                             accClass = 'ring',
+                             statEffect = '+10 max hp')
+ac0002 = classes.accessories(ID = 'ac0002',
+                             name = 'travellers cloak',
+                             weight = 5,
+                             value = 50,
+                             desc = 'a brown, dusty cloak',
+                             accClass = 'cloak',
+                             statEffect = '+2 dexterity')
+ac0003 = classes.accessories(ID = 'ac0003',
+                             name = 'mystic pendant',
+                             weight = 3,
+                             value = 500,
+                             desc = 'a mystic pendant with ancient words inscribed on it',
+                             accClass = 'pendant',
+                             statEffect = '+30 max ap')
+#Items========================================================================
+it0001 = classes.items(ID = 'it0001',
+                             name = 'health potion',
+                             weight = 2,
+                             value = 250,
+                             desc = 'a weak health potion',
+                             effect = '+30 hp')
+it0002 = classes.items(ID = 'it0001',
+                             name = 'mana potion',
+                             weight = 2,
+                             value = 300,
+                             desc = 'a weak mana potion',
+                             effect = '+40 ap')
+it003 = classes.items('it0001',
+                             name = 'mana potion',
+                             weight = 2,
+                             value = 300,
+                             desc = 'a weak mana potion',
+                             effect = '+40 ap')
+#NOTE: if you wanna add quest items and such they'll go here
+
+
