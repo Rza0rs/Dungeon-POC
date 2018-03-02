@@ -110,7 +110,16 @@ class item():
         self.weight = weight
         self.value = value 
         self.desc = desc
-            
+#==============================================================================================
+class currency(item):
+    'The currency in the world of Thule.'
+    def __init__(self, ID, name, weight, value, desc):
+        super().__init__( ID, name, weight, value, desc)
+    def currencyDescription(self):
+        print ('Name -', self.name)
+        print ('Value -', self.value)
+        print ('Descripton -', self.desc)
+
 #weapon classes--------------------------------------------------------------------------------
 class weapon(item):
     'weapons'

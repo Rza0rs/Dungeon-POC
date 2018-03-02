@@ -99,12 +99,37 @@ it0002 = classes.items(ID = 'it0001',
                              value = 300,
                              desc = 'a weak mana potion',
                              effect = '+40 ap')
-it003 = classes.items('it0001',
-                             name = 'mana potion',
-                             weight = 2,
-                             value = 300,
-                             desc = 'a weak mana potion',
-                             effect = '+40 ap')
+#Currency======================================================================
+cu0001 = classes.currency(ID = 'cu0001',
+                          name ='gold',
+                          weight = 0,
+                          value = 1,
+                          desc = 'The common currency in the world of Thule.')
+cu0002 = classes.currency(ID = 'cu0002',
+                          name='Diamond',
+                          weight=0.5,
+                          value=600,
+                          desc='The clear reflections in the diamond make it the ultimate jewel for the wealthy.')
+cu0003 = classes.currency(ID = 'cu0003',
+                          name='Ruby',
+                          weight=0.2,
+                          value=350,
+                          desc='The shining allure of the Ruby makes it popular with all wealth classes, and into all jewelers shops.')
+cu0004 = classes.currency(ID = 'cu0004',
+                          name='Sapphire',
+                          weight=0.1,
+                          value=250,
+                          desc='The blue of the Sapphire reflects the allure of the sky, making it popular in use for jewelry.')
+
+npc0001 = classes.npc(name = '',
+                      level = ,
+                      desc = ,
+                      essential = '',
+                      hostile = '',
+                      HP = ,
+                      AP = ,)
 #NOTE: if you wanna add quest items and such they'll go here
+
+
 
 
