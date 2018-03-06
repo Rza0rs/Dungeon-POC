@@ -325,7 +325,7 @@ npc0005 = classes.npc(name = 'Black Legionnaire',
                       HP = 45 ,
 
                       AP = 20,)
-npc0001 = classes.npc(name = 'Black Rogue',
+npc0006 = classes.npc(name = 'Black Rogue',
 
                       level = 1 ,
 
@@ -338,7 +338,7 @@ npc0001 = classes.npc(name = 'Black Rogue',
                       HP = 15 ,
 
                       AP = 40,)
-npc0001 = classes.npc(name = 'Black Battlemage',
+npc0007 = classes.npc(name = 'Black Battlemage',
 
                       level = 1 ,
 
@@ -351,7 +351,7 @@ npc0001 = classes.npc(name = 'Black Battlemage',
                       HP = 20 ,
 
                       AP = 40,)
-npc0001 = classes.npc(name = 'Dungeon Rat',
+npc0008 = classes.npc(name = 'Dungeon Rat',
 
                       level = 1 ,
 
@@ -364,7 +364,7 @@ npc0001 = classes.npc(name = 'Dungeon Rat',
                       HP = 15 ,
 
                       AP = 20,)
-npc0001 = classes.npc(name = 'Nested Spider',
+npc0009 = classes.npc(name = 'Nested Spider',
 
                       level = 1 ,
 
@@ -377,7 +377,7 @@ npc0001 = classes.npc(name = 'Nested Spider',
                       HP = 25 ,
 
                       AP = 20,)
-npc0001 = classes.npc(name = 'Starving Spider',
+npc0010 = classes.npc(name = 'Starving Spider',
 
                       level = 1 ,
 
@@ -390,7 +390,7 @@ npc0001 = classes.npc(name = 'Starving Spider',
                       HP = 10 ,
 
                       AP = 15,)
-npc0001 = classes.npc(name = 'Vampiric bat',
+npc0011 = classes.npc(name = 'Vampiric bat',
 
                       level = 1 ,
 
