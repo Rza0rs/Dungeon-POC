@@ -260,22 +260,148 @@ cu0004 = classes.currency(ID = 'cu0004',
 
 
 #Npc's=======================================================================
-npc0001 = classes.npc(name = '',
+npc0001 = classes.npc(name = 'Black Knight',
 
-                      level = ,
+                      level = 1 ,
 
-                      desc = ,
+                      desc = 'A well trained swordsman fighting for the Black faction.',
 
-                      essential = '',
+                      essential = 'no',
 
-                      hostile = '',
+                      hostile = 'yes',
 
-                      HP = ,
+                      HP = 40 ,
 
-                      AP = ,)
+                      AP = 20,)
+npc0002 = classes.npc(name = 'Undead Warrior',
 
-#NOTE: if you wanna add quest items and such they'll go here
+                      level = 1 ,
 
+                      desc = 'A resurrected swordsman infused with the will to protect something.',
 
+                      essential = 'no',
 
+                      hostile = 'yes',
 
+                      HP = 30 ,
+
+                      AP = 30,)
+npc0003 = classes.npc(name = 'Undead Archer',
+
+                      level = 1 ,
+
+                      desc = 'A fallen bowman who has resurrected in need to protect something.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 15 ,
+
+                      AP = 40,)
+npc0004 = classes.npc(name = 'Undead Pilgrim',
+
+                      level = 1 ,
+
+                      desc = 'A resurrected pilgrim with near to no strength.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP =  10,
+
+                      AP = 10,)
+npc0005 = classes.npc(name = 'Black Legionnaire',
+
+                      level = 1 ,
+
+                      desc = 'A well trained sword and shield barrier, of the Black faction.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 45 ,
+
+                      AP = 20,)
+npc0001 = classes.npc(name = 'Black Rogue',
+
+                      level = 1 ,
+
+                      desc = 'A well trained soldier whos fighting style is based on speed and small weaponry ',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 15 ,
+
+                      AP = 40,)
+npc0001 = classes.npc(name = 'Black Battlemage',
+
+                      level = 1 ,
+
+                      desc = 'A mage of the Black faction well versed in quick and devastating magic.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 20 ,
+
+                      AP = 40,)
+npc0001 = classes.npc(name = 'Dungeon Rat',
+
+                      level = 1 ,
+
+                      desc = 'A rat grown to an unreasonable size from feeding off of the creatures in the dungeon.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 15 ,
+
+                      AP = 20,)
+npc0001 = classes.npc(name = 'Nested Spider',
+
+                      level = 1 ,
+
+                      desc = 'An Arachnid grown to large size through making its home in a feeding ground.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 25 ,
+
+                      AP = 20,)
+npc0001 = classes.npc(name = 'Starving Spider',
+
+                      level = 1 ,
+
+                      desc = 'An Arachnid starving and in desperation for food',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 10 ,
+
+                      AP = 15,)
+npc0001 = classes.npc(name = 'Vampiric bat',
+
+                      level = 1 ,
+
+                      desc = 'A creature that inhabits dark areas in search of blood.',
+
+                      essential = 'no',
+
+                      hostile = 'yes',
+
+                      HP = 10 ,
+
+                      AP = 20,)
+
+#NOTE: if you wanna add redundant items and such they'll go here
