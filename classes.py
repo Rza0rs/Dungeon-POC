@@ -453,6 +453,9 @@ class npc(actor):
     def __init__(self, name, level, desc, essential, hostile, HP, AP, move1, move2, move3):
         self.hostile = hostile
         self.desc = desc
+        self.move1 = move1
+        self.move2 = move2
+        self.move3 = move 3
         super().__init__(name, level, essential, HP, AP)
     def npcStats(self):
         print(self.name)
@@ -476,5 +479,3 @@ class move():
         self.OpponentAPDamage = OpponentAPDamage
         self.PlayerHPDamage = PlayerHPDamage
         self.PlayerAPDamage = PlayerAPDamage
-
-
