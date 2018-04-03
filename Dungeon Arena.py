@@ -69,7 +69,8 @@ class Game(object):
                               "Get Ready for the full product, THULE, coming soon!")
                         self.curr_pos = self.prev_pos[:]
                         self.move_player()
-                        print(self.curr_pos)
+                        self.flag = False
+
                         break
                 elif self.curr_pos == [3, 1]:
                     while self.flag:

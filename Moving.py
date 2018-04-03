@@ -18,7 +18,7 @@ class Game(object):
     ]
     EXIT = "stop"
     START = [0, 0]
-    DEFAULT = [["O"] * 5 for _ in range(5)]
+    DEFAULT = [["O"] * 6 for _ in range(6)]
 
     def __init__(self):
         self.flag = True
@@ -30,9 +30,10 @@ class Game(object):
     def move_player(self):
         px, py = self.prev_pos
         cx, cy = self.curr_pos
-        if (-3 < cx <= 3) and (-3 < cy <= 3):
+        if (0 <= cx <= 3) and (0 <= cy <= 5):
             self.arena[py][px] = Game.MARKER_O
             self.arena[cy][cx] = Game.MARKER_X
+
         else:
             print("Please enter a proper direction.")
             self.curr_pos = self.prev_pos[:]
@@ -47,12 +48,18 @@ class Game(object):
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[d > 2] += d - (1 if d < 3 else 4)
                 self.move_player()
-                print(self.curr_pos)
+                if self.curr_pos == [1, 0] or [1, 1]:
+                  while True:
+                    print("Please enter a proper direction.")
+                    self.curr_pos = self.prev_pos[:]
+                    self.move_player()
+                    print(self.prev_pos)
+                    break
+
             elif ctrl == Game.EXIT:
                 self.flag = False
             else:
                 print("Please enter a proper direction.")
-
 
 my_game = Game()
 my_game.play()
