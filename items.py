@@ -3,41 +3,46 @@ import classes
 mv0001 = classes.move(name="slash",
                       OpponentHPDamage=-10,
                       OpponentAPDamage=0,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-5)
+                      UserHPDamage=0,
+                      UserAPDamage=-5)
 mv0002 = classes.move(name="stab",
                       OpponentHPDamage=-20,
                       OpponentAPDamage=0,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-25)
+                      UserHPDamage=0,
+                      UserAPDamage=-25)
 mv0003 = classes.move(name="bash",
                       OpponentHPDamage=-5,
                       OpponentAPDamage=-20,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-10)
+                      UserHPDamage=0,
+                      UserAPDamage=-10)
 mv0004 = classes.move(name="evade",
                       OpponentHPDamage=0,
                       OpponentAPDamage=0,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-18)
+                      UserHPDamage=0,
+                      UserAPDamage=-18)
 mv0005 = classes.move(name="fireball",
                       OpponentHPDamage=-20,
                       OpponentAPDamage=0,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-20)
+                      UserHPDamage=0,
+                      UserAPDamage=-20)
 mv0006 = classes.move(name="frostfall",
                       OpponentHPDamage=-5,
                       OpponentAPDamage=-20,
-                      PlayerHPDamage=0,
-                      PlayerAPDamage=-15)
+                      UserHPDamage=0,
+                      UserAPDamage=-15)
 mv0007 = classes.move(name="heal",
                       OpponentHPDamage=0,
                       OpponentAPDamage=0,
-                      PlayerHPDamage=+30,
-                      PlayerAPDamage=-20)
+                      UserHPDamage=+30,
+                      UserAPDamage=-20)
+#Effects====================================================================
+ef0001 = classes.effect(name = 'Heal',
+                        PlayerHPRegen= +20,
+                        PlayerAPRegen= 0)
 
-import classes
-
+ef0002 = classes.effect(name = 'ManaHeal',
+                        PlayerHPRegen= 0,
+                        PlayerAPRegen= +20)
 #Armour=======================================================================
 
 ha0001 = classes.heavyArmour(ID = 'ha0001',
@@ -82,11 +87,11 @@ hw0001 = classes.heavyWeapon(ID = 'hw0001',
 
                              effects = 'none',
 
-                             move1 = 'slash',
+                             move1 = mv0001,
 
-                             move2 = 'stab',
+                             move2 = mv0002,
 
-                             move3 = 'bash',
+                             move3 = mv0003,
 
                              StrReq = 10,
 
@@ -108,11 +113,11 @@ lw0001 = classes.lightWeapon(ID = 'lw0001',
 
                              effects = 'none',
 
-                             move1 = 'slash',
+                             move1 = mv0001,
 
-                             move2 = 'stab',
+                             move2 = mv0002,
 
-                             move3 = 'evade',
+                             move3 = mv0004,
 
                              StrReq = 4,
 
@@ -134,11 +139,11 @@ mw0001 = classes.magicWeapon(ID = 'mw0001',
 
                              effects = 'none',
 
-                             move1 = 'fireball',
+                             move1 = mv0005,
 
-                             move2 = 'frostfall',
+                             move2 = mv0006,
 
-                             move3 = 'magicshield',
+                             move3 = mv0007,
 
                              StrReq = 10,
 
@@ -202,7 +207,7 @@ it0001 = classes.items(ID = 'it0001',
 
                              desc = 'a weak health potion',
 
-                             effect = '+30 hp')
+                             effect = ef0001)
 
 it0002 = classes.items(ID = 'it0001',
 
@@ -214,7 +219,7 @@ it0002 = classes.items(ID = 'it0001',
 
                              desc = 'a weak mana potion',
 
-                             effect = '+40 ap')
+                             effect = ef0002)
 
 #Currency======================================================================
 
@@ -262,146 +267,42 @@ cu0004 = classes.currency(ID = 'cu0004',
 #Npc's=======================================================================
 npc0001 = classes.npc(name = 'Black Knight',
 
+
+
                       level = 1 ,
+
+
 
                       desc = 'A well trained swordsman fighting for the Black faction.',
 
-                      essential = 'no',
 
-                      hostile = 'yes',
-
-                      HP = 40 ,
-
-                      AP = 20,)
-npc0002 = classes.npc(name = 'Undead Warrior',
-
-                      level = 1 ,
-
-                      desc = 'A resurrected swordsman infused with the will to protect something.',
 
                       essential = 'no',
 
-                      hostile = 'yes',
 
-                      HP = 30 ,
-
-                      AP = 30,)
-npc0003 = classes.npc(name = 'Undead Archer',
-
-                      level = 1 ,
-
-                      desc = 'A fallen bowman who has resurrected in need to protect something.',
-
-                      essential = 'no',
 
                       hostile = 'yes',
 
-                      HP = 15 ,
 
-                      AP = 40,)
-npc0004 = classes.npc(name = 'Undead Pilgrim',
 
-                      level = 1 ,
+                      HP = 40,
 
-                      desc = 'A resurrected pilgrim with near to no strength.',
 
-                      essential = 'no',
 
-                      hostile = 'yes',
+                      AP = 20,
+                      move1 = mv0001,
+                      move2 = mv0002,
+                      move3 = mv0003)
 
-                      HP =  10,
 
-                      AP = 10,)
-npc0005 = classes.npc(name = 'Black Legionnaire',
+#none=========================================================================
+none = classes.item(ID = 'none',
+                    name = 'none',
+                    weight = 0,
+                    value = 0,
+                    desc = 'empty slot')
+#NOTE: if you wanna add quest items and such they'll go here
 
-                      level = 1 ,
 
-                      desc = 'A well trained sword and shield barrier, of the Black faction.',
 
-                      essential = 'no',
 
-                      hostile = 'yes',
-
-                      HP = 45 ,
-
-                      AP = 20,)
-npc0006 = classes.npc(name = 'Black Rogue',
-
-                      level = 1 ,
-
-                      desc = 'A well trained soldier whos fighting style is based on speed and small weaponry ',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 15 ,
-
-                      AP = 40,)
-npc0007 = classes.npc(name = 'Black Battlemage',
-
-                      level = 1 ,
-
-                      desc = 'A mage of the Black faction well versed in quick and devastating magic.',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 20 ,
-
-                      AP = 40,)
-npc0008 = classes.npc(name = 'Dungeon Rat',
-
-                      level = 1 ,
-
-                      desc = 'A rat grown to an unreasonable size from feeding off of the creatures in the dungeon.',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 15 ,
-
-                      AP = 20,)
-npc0009 = classes.npc(name = 'Nested Spider',
-
-                      level = 1 ,
-
-                      desc = 'An Arachnid grown to large size through making its home in a feeding ground.',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 25 ,
-
-                      AP = 20,)
-npc0010 = classes.npc(name = 'Starving Spider',
-
-                      level = 1 ,
-
-                      desc = 'An Arachnid starving and in desperation for food',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 10 ,
-
-                      AP = 15,)
-npc0011 = classes.npc(name = 'Vampiric bat',
-
-                      level = 1 ,
-
-                      desc = 'A creature that inhabits dark areas in search of blood.',
-
-                      essential = 'no',
-
-                      hostile = 'yes',
-
-                      HP = 10 ,
-
-                      AP = 20,)
-
-#NOTE: if you wanna add redundant items and such they'll go here
