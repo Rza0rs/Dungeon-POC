@@ -11,6 +11,7 @@ class inventory():
 class ownedWeapons(inventory):
 
     def __init__(self, type, weapon1, weapon2, weapon3):
+
         self.weapon1 = weapon1
 
         self.weapon2 = weapon2
@@ -19,17 +20,12 @@ class ownedWeapons(inventory):
 
         super().__init__(type)
 
-    def encodeownedWeapons(self):
-        global weaponString
-
-        weaponStats = [self.weapon1, self.weapon2, self.weapon3]
-
-        weaponString = " ".join([str(i) for i in weaponStats])
 
 
 class ownedArmour(inventory):
 
     def __init__(self, type, armour1, armour2, armour3):
+
         self.armour1 = armour1
 
         self.armour2 = armour2
@@ -38,17 +34,11 @@ class ownedArmour(inventory):
 
         super().__init__(type)
 
-    def encodeownedArmour(self):
-        global armourString
-
-        armourStats = [self.armour1, self.armour2, self.armour3]
-
-        armourString = " ".join([str(i) for i in armourStats])
-
 
 class ownedItems(inventory):
 
     def __init__(self, type, item1, item2, item3):
+
         self.item1 = item1
 
         self.item2 = item2
@@ -57,17 +47,11 @@ class ownedItems(inventory):
 
         super().__init__(type)
 
-    def encodeownedItems(self):
-        global itemString
-
-        itemStats = [[self.item1, self.item2, self.item3]]
-
-        itemString = " ".join([str(i) for i in itemStats])
-
 
 class ownedAccessories(inventory):
 
     def __init__(self, type, acc1, acc2, acc3):
+
         self.acc1 = acc1
 
         self.acc2 = acc2
@@ -76,47 +60,30 @@ class ownedAccessories(inventory):
 
         super().__init__(type)
 
-    def encodeownedAccessories(self):
-        global accessoryString
-
-        accessoryStats = [[self.acc1, self.acc2, self.acc3]]
-
-        accessoryString = " ".join([str(i) for i in accessoryStats])
-
 
 class equippedWeapons(inventory):
 
     def __init__(self, type, primary):
+
         self.primary = primary
 
         super().__init__(type)
 
-    def encodeequippedWeapons(self):
-        global eweaponString
-
-        eweaponStats = [self.primary]
-
-        eweaponString = " ".join([str(i) for i in eweaponStats])
 
 
 class equippedArmour(inventory):
 
     def __init__(self, type, armour):
+
         self.armour = armour
 
         super().__init__(type)
-
-    def encodeequippedArmour(self):
-        global earmourString
-
-        earmourStats = [self.armour]
-
-        earmourString = " ".join([str(i) for i in earmourStats])
 
 
 class equippedAccessories(inventory):
 
     def __init__(self, type, acc1, acc2, acc3, acc4):
+
         self.acc1 = acc1
 
         self.acc2 = acc2
@@ -127,17 +94,12 @@ class equippedAccessories(inventory):
 
         super().__init__(type)
 
-    def encodeequippedAccessories(self):
-        global accString
-
-        accStats = [self.acc1, self.acc2, self.acc3, self.acc4]
-
-        accString = " ".join([str(i) for i in accStats])
 
 
 class beltItems(inventory):
 
     def __init__(self, type, pouch1, pouch2, pouch3, pouch4, pouch5, pouch6):
+
         self.pouch1 = pouch1
 
         self.pouch2 = pouch2
@@ -152,16 +114,7 @@ class beltItems(inventory):
 
         super().__init__(type)
 
-    def encodebeltItems(self):
-        global beltString
-
-        beltStats = [self.pouch1, self.pouch2, self.pouch3, self.pouch4, self.pouch5, self.pouch6]
-
-        beltString = " ".join([str(i) for i in beltStats])
-
-
-# =============================================================================================
-
+#===================================================================
 # item classes=================================================================================
 
 class item():
@@ -177,7 +130,6 @@ class item():
         self.value = value
 
         self.desc = desc
-
 
 # ==============================================================================================
 
@@ -198,7 +150,7 @@ class currency(item):
 # weapon classes--------------------------------------------------------------------------------
 
 class weapon(item):
-    'weapons'
+    """weapons"""
 
     def __init__(self, ID, name, weight, value, desc, weaponClass, effects, move1, move2, move3, StrReq, DexReq,
                  IntReq):
@@ -430,21 +382,6 @@ class pc(actor):
 
         print('Intelligence -', self.Int)
 
-    def encodeStats(self):
-        global statsString
-
-        stats = [self.name, self.subclass, self.level, self.HP, self.AP, self.Str, self.Dex, self.Int, self.essential,
-                 self.location]
-
-        statsString = " ".join([str(i) for i in stats])
-
-        saveFile = open("saveFile.txt", "w")
-
-        saveFile.write(statsString)
-
-        saveFile.close()
-
-
 # -----------------------------------------------------------------------------------------------
 
 class npc(actor):
@@ -455,7 +392,7 @@ class npc(actor):
         self.desc = desc
         self.move1 = move1
         self.move2 = move2
-        self.move3 = move 3
+        self.move3 = move3
         super().__init__(name, level, essential, HP, AP)
     def npcStats(self):
         print(self.name)
@@ -473,9 +410,45 @@ class npc(actor):
 #Moves classes====================================================================================
 class move():
     """moves"""
-    def __init__(self, name, OpponentHPDamage, OpponentAPDamage, PlayerHPDamage, PlayerAPDamage):
+    def __init__(self, name, OpponentHPDamage, OpponentAPDamage, UserHPDamage, UserAPDamage):
         self.name = name
         self.OpponentHPDamage = OpponentHPDamage
         self.OpponentAPDamage = OpponentAPDamage
-        self.PlayerHPDamage = PlayerHPDamage
-        self.PlayerAPDamage = PlayerAPDamage
+        self.UserHPDamage = UserHPDamage
+        self.UserAPDamage = UserAPDamage
+#=============================================================================================
+#Effects Classes==============================================================================
+class effect():
+    """effets"""
+    def __init__(self, name, PlayerHPRegen, PlayerAPRegen):
+        self.name = name
+        self.PlayerHPRegen = PlayerHPRegen
+        self.PlayerAPRegen = PlayerAPRegen
+#============================================================`=================================
+class combat():
+    """combat"""
+    def __init__(self, playerHP, playerAP, enemyHP, enemyAP,
+                 PTplayerCurrentHP, PTplayerCurrentAP, PTenemyCurrentHP, PTenemyCurrentAP,
+                 ETplayerCurrentHP, ETplayerCurrentAP, ETenemyCurrentHP, ETenemyCurrentAP,
+                 playerCanFightHP, playerCanFightAP, enemyCanFightHP, enemyCanFightAP):
+
+        self.playerHP = playerHP
+        self.playerAP = playerAP
+        self.enemyHP = enemyHP
+        self.enemyAP = enemyAP
+
+        self.PTplayerCurrentHP = PTplayerCurrentHP
+        self.PTplayerCurrentAP = PTplayerCurrentAP
+        self.PTenemyCurrentHP = PTenemyCurrentHP
+        self.PTenemyCurrentAP = PTenemyCurrentAP
+
+        self.ETplayerCurrentHP = ETplayerCurrentHP
+        self.ETplayerCurrentAP = ETplayerCurrentAP
+        self.ETenemyCurrentHP = ETenemyCurrentHP
+        self.ETenemyCurrentAP = ETenemyCurrentAP
+
+        self.playerCanFightHP = playerCanFightHP
+        self.playerCanFightAP = playerCanFightAP
+        self.enemyCanFightHP = enemyCanFightHP
+        self.enemyCanFightAP = enemyCanFightAP
+
