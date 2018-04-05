@@ -195,22 +195,7 @@ def CombatSim():
     CurrentCombat = classes.combat(playerHP = PlayerHP,
                                    playerAP = PlayerAP,
                                    enemyHP = EnemyHP,
-                                   enemyAP = EnemyAP,
-
-                                   PTplayerCurrentHP= PlayerHP,
-                                   PTplayerCurrentAP= PlayerAP,
-                                   PTenemyCurrentHP= EnemyHP,
-                                   PTenemyCurrentAP= EnemyAP,
-
-                                   ETplayerCurrentHP=PlayerHP,
-                                   ETplayerCurrentAP=PlayerAP,
-                                   ETenemyCurrentHP=EnemyHP,
-                                   ETenemyCurrentAP=EnemyAP,
-
-                                   playerCanFightHP= True,
-                                   playerCanFightAP= True,
-                                   enemyCanFightHP= True,
-                                   enemyCanFightAP= True)
+                                   enemyAP = EnemyAP,)
 #===========================================================================================
     #defines the player turn
     def PlayerTurn():
@@ -253,16 +238,16 @@ def CombatSim():
                         print("")
 
                 # Framework for the effect of items on player and enemy HP and AP stats
-                CurrentCombat.PTenemyCurrentHP = CurrentCombat.enemyHP
-                CurrentCombat.PTenemyCurrentAP = CurrentCombat.enemyAP
-                CurrentCombat.PTplayerCurrentHP = CurrentCombat.playerHP + PlayerSelectedItem.effect.PlayerHPRegen
-                CurrentCombat.PTplayerCurrentAP = CurrentCombat.playerAP + PlayerSelectedItem.effect.PlayerAPRegen
+                CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                CurrentCombat.playerHP = CurrentCombat.playerHP + PlayerSelectedItem.effect.PlayerHPRegen
+                CurrentCombat.playerAP = CurrentCombat.playerAP + PlayerSelectedItem.effect.PlayerAPRegen
 
+                print("")
                 print("You used", PlayerSelectedItem.name + "!")
                 print("")
-                print("Your HP is now", CurrentCombat.PTplayerCurrentHP)
-                print("Your AP is now", CurrentCombat.ETplayerCurrentAP)
-
+                print("Your HP is now", CurrentCombat.playerHP)
+                print("Your AP is now", CurrentCombat.playerAP)
                 break
 
             elif ActionSelect == 'engage':
@@ -294,25 +279,18 @@ def CombatSim():
                 continue
 
             # Framework for the effect of a weapons move on player and enemy HP and AP stats
-            CurrentCombat.PTenemyCurrentHP = CurrentCombat.enemyHP + PlayerSelectedMove.OpponentHPDamage
-            CurrentCombat.PTenemyCurrentAP = CurrentCombat.enemyAP + PlayerSelectedMove.OpponentAPDamage
-            CurrentCombat.PTplayerCurrentHP = CurrentCombat.playerHP + PlayerSelectedMove.UserHPDamage
-            CurrentCombat.PTplayerCurrentAP = CurrentCombat.playerAP + PlayerSelectedMove.UserAPDamage
-
-            while True:
-                print("You used", PlayerSelectedMove.name)
+            CurrentCombat.enemyHP = CurrentCombat.enemyHP + PlayerSelectedMove.OpponentHPDamage
+            CurrentCombat.enemyAP = CurrentCombat.enemyAP + PlayerSelectedMove.OpponentAPDamage
+            CurrentCombat.playerHP = CurrentCombat.playerHP + PlayerSelectedMove.UserHPDamage
+            CurrentCombat.playerAP = CurrentCombat.playerAP + PlayerSelectedMove.UserAPDamage
+            print("You used", PlayerSelectedMove.name)
+            time.sleep(.5)
+            if CurrentCombat.enemyHP >= 0:
+                print("The", EnemySelect.name + "'s health falls to", str(CurrentCombat.enemyHP) + "!")
                 print("")
-                time.sleep(.5)
-                if CurrentCombat.PTenemyCurrentHP <= 0:
-                    print("You defeated the", EnemySelect.name)
-                    break
-                else:
-                    print("The", EnemySelect.name + "'s health falls to", str(CurrentCombat.PTenemyCurrentHP) + "!")
-                    if CurrentCombat.PTenemyCurrentAP <= 0:
-                        print("The", EnemySelect.name, "is exhausted!")
-                    elif CurrentCombat.PTplayerCurrentAP <= 0:
-                        print("You are exhausted!")
-                    break
+            elif CurrentCombat.enemyHP < 0:
+                print("The", EnemySelect.name + "'s health falls below 0!")
+                print("")
             break
 #================================================================================================
     #defines enemy turn (which is essentially the same, with choices being determined randomly)
@@ -336,34 +314,26 @@ def CombatSim():
             print("You became confused, gather your thoughts.")
             print("")
 
-        CurrentCombat.ETenemyCurrentHP = CurrentCombat.PTenemyCurrentHP + EnemySelectedMove.UserHPDamage
-        CurrentCombat.ETenemyCurrentAP = CurrentCombat.PTenemyCurrentAP + EnemySelectedMove.UserAPDamage
-        CurrentCombat.ETplayerCurrentHP = CurrentCombat.PTplayerCurrentHP + EnemySelectedMove.OpponentHPDamage
-        CurrentCombat.ETplayerCurrentAP = CurrentCombat.PTplayerCurrentAP + EnemySelectedMove.OpponentHPDamage
-        while True:
-            print("Enemy used", EnemySelectedMove.name)
-            print("")
-            time.sleep(.5)
-            if CurrentCombat.ETplayerCurrentHP <= 0:
-                print("You are dead.")
-                break
-            else:
-                print("Your health falls to", str(CurrentCombat.ETplayerCurrentHP) + "!")
-                if CurrentCombat.ETenemyCurrentAP <= 0:
-                    print("The", EnemySelect.name, "is exhausted!")
-                    break
-                elif CurrentCombat.ETplayerCurrentAP <= 0:
-                    print("You are exhausted!")
-                    break
-            break
+        CurrentCombat.enemyHP = CurrentCombat.enemyHP + EnemySelectedMove.UserHPDamage
+        CurrentCombat.enemyAP = CurrentCombat.enemyAP + EnemySelectedMove.UserAPDamage
+        CurrentCombat.playerHP = CurrentCombat.playerHP + EnemySelectedMove.OpponentHPDamage
+        CurrentCombat.playerAP = CurrentCombat.playerAP + EnemySelectedMove.OpponentHPDamage
 
+        print("Enemy used", EnemySelectedMove.name)
+        time.sleep(.5)
+        if CurrentCombat.playerHP >= 0:
+            print("Your health falls to", str(CurrentCombat.playerHP) + "!")
+            print("")
+        elif CurrentCombat.playerHP < 0:
+            print("Your health falls below 0!")
+            print("")
 #---------------------------------------------------------------------------------------
     #framework that utilizes and calls the actor turns to create the combat sim
     global PlayerInitiateCombatInput
     global EnemySelect
     EnemySelect = items.npc0001
     print("A ", EnemySelect.name, "appears!\n")
-    PlayerInitiateCombatInput = input("Fight or flee? >>")
+    PlayerInitiateCombatInput = input("Will you Fight or flee? >>")
 
     while True:
         #player may try to evade the combatant
@@ -378,49 +348,38 @@ def CombatSim():
                 PlayerInitiateCombatInput = 'fight'
 
         elif PlayerInitiateCombatInput == 'fight':
+            playerAPReset = CurrentCombat.playerAP
+            enemyAPReset = CurrentCombat.enemyAP
             while True:
+                CurrentCombat.playerAP = playerAPReset
+                CurrentCombat.enemyAP = enemyAPReset
                 if CurrentCombat.playerHP <= 0:
+                    print("You are dead.")
                     break
-                elif CurrentCombat.ETplayerCurrentAP <= 0 <= CurrentCombat.ETplayerCurrentHP:
+                elif CurrentCombat.playerAP <= 0 <= CurrentCombat.playerHP:
                     print("You do not have enough stamina to fight")
-                    EnemyTurn()
-                    CurrentCombat.playerHP = CurrentCombat.ETplayerCurrentHP
-                    CurrentCombat.playerAP = CurrentCombat.ETenemyCurrentAP
-                    CurrentCombat.enemyHP = CurrentCombat.ETenemyCurrentHP
-                    CurrentCombat.enemyAP = CurrentCombat.ETenemyCurrentAP
+                elif CurrentCombat.enemyHP <= 0:
+                    break
+                else:
+                    PlayerTurn()
+
+                if CurrentCombat.enemyAP <= 0 <= CurrentCombat.playerHP:
+                    print('The enemy is exhausted')
+                    print("")
                     continue
 
-                elif CurrentCombat.PTenemyCurrentHP >= 0 >= CurrentCombat.PTenemyCurrentAP:
-                    print('The enemy can not continue (AP - 1)')
-                    PlayerTurn()
-
-                elif CurrentCombat.PTenemyCurrentHP <= 0:
+                elif CurrentCombat.enemyHP <= 0:
+                    print('The enemy is Dead...')
                     break
 
-                elif CurrentCombat.ETplayerCurrentHP and CurrentCombat.ETenemyCurrentAP >= 0:
-                    PlayerTurn()
-
-                    if CurrentCombat.PTenemyCurrentHP and CurrentCombat.PTenemyCurrentAP >= 0:
-                        EnemyTurn()
-                        CurrentCombat.playerHP = CurrentCombat.ETplayerCurrentHP
-                        CurrentCombat.playerAP = CurrentCombat.ETenemyCurrentAP
-                        CurrentCombat.enemyHP = CurrentCombat.ETenemyCurrentHP
-                        CurrentCombat.enemyAP = CurrentCombat.ETenemyCurrentAP
-
-                    elif CurrentCombat.PTplayerCurrentHP >= 0 >= CurrentCombat.PTenemyCurrentAP:
-                        print('The enemy can not continue (AP - 2)')
-                        PlayerTurn()
-
-                    elif CurrentCombat.PTenemyCurrentHP <= 0:
-                        break
-
-
-
                 else:
-                    print('error')
+                    EnemyTurn()
+        else:
+            print("You became confused, gather your thoughts")
 
-            print("Battle over")
-            break
+        time.sleep(.5)
+        print("Battle over")
+        break
 
 
 #=======================================================================================================================
