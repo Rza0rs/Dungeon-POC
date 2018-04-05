@@ -195,7 +195,22 @@ def CombatSim():
     CurrentCombat = classes.combat(playerHP = PlayerHP,
                                    playerAP = PlayerAP,
                                    enemyHP = EnemyHP,
-                                   enemyAP = EnemyAP,)
+                                   enemyAP = EnemyAP,
+
+                                   PTplayerCurrentHP= PlayerHP,
+                                   PTplayerCurrentAP= PlayerAP,
+                                   PTenemyCurrentHP= EnemyHP,
+                                   PTenemyCurrentAP= EnemyAP,
+
+                                   ETplayerCurrentHP=PlayerHP,
+                                   ETplayerCurrentAP=PlayerAP,
+                                   ETenemyCurrentHP=EnemyHP,
+                                   ETenemyCurrentAP=EnemyAP,
+
+                                   playerCanFightHP= True,
+                                   playerCanFightAP= True,
+                                   enemyCanFightHP= True,
+                                   enemyCanFightAP= True)
 #===========================================================================================
     #defines the player turn
     def PlayerTurn():
@@ -238,16 +253,16 @@ def CombatSim():
                         print("")
 
                 # Framework for the effect of items on player and enemy HP and AP stats
-                CurrentCombat.enemyHP = CurrentCombat.enemyHP
-                CurrentCombat.enemyAP = CurrentCombat.enemyAP
-                CurrentCombat.playerHP = CurrentCombat.playerHP + PlayerSelectedItem.effect.PlayerHPRegen
-                CurrentCombat.playerAP = CurrentCombat.playerAP + PlayerSelectedItem.effect.PlayerAPRegen
+                CurrentCombat.PTenemyCurrentHP = CurrentCombat.enemyHP
+                CurrentCombat.PTenemyCurrentAP = CurrentCombat.enemyAP
+                CurrentCombat.PTplayerCurrentHP = CurrentCombat.playerHP + PlayerSelectedItem.effect.PlayerHPRegen
+                CurrentCombat.PTplayerCurrentAP = CurrentCombat.playerAP + PlayerSelectedItem.effect.PlayerAPRegen
 
-                print("")
                 print("You used", PlayerSelectedItem.name + "!")
                 print("")
-                print("Your HP is now", CurrentCombat.playerHP)
-                print("Your AP is now", CurrentCombat.playerAP)
+                print("Your HP is now", CurrentCombat.PTplayerCurrentHP)
+                print("Your AP is now", CurrentCombat.ETplayerCurrentAP)
+
                 break
 
             elif ActionSelect == 'engage':
@@ -279,18 +294,25 @@ def CombatSim():
                 continue
 
             # Framework for the effect of a weapons move on player and enemy HP and AP stats
-            CurrentCombat.enemyHP = CurrentCombat.enemyHP + PlayerSelectedMove.OpponentHPDamage
-            CurrentCombat.enemyAP = CurrentCombat.enemyAP + PlayerSelectedMove.OpponentAPDamage
-            CurrentCombat.playerHP = CurrentCombat.playerHP + PlayerSelectedMove.UserHPDamage
-            CurrentCombat.playerAP = CurrentCombat.playerAP + PlayerSelectedMove.UserAPDamage
-            print("You used", PlayerSelectedMove.name)
-            time.sleep(.5)
-            if CurrentCombat.enemyHP >= 0:
-                print("The", EnemySelect.name + "'s health falls to", str(CurrentCombat.enemyHP) + "!")
+            CurrentCombat.PTenemyCurrentHP = CurrentCombat.enemyHP + PlayerSelectedMove.OpponentHPDamage
+            CurrentCombat.PTenemyCurrentAP = CurrentCombat.enemyAP + PlayerSelectedMove.OpponentAPDamage
+            CurrentCombat.PTplayerCurrentHP = CurrentCombat.playerHP + PlayerSelectedMove.UserHPDamage
+            CurrentCombat.PTplayerCurrentAP = CurrentCombat.playerAP + PlayerSelectedMove.UserAPDamage
+
+            while True:
+                print("You used", PlayerSelectedMove.name)
                 print("")
-            elif CurrentCombat.enemyHP < 0:
-                print("The", EnemySelect.name + "'s health falls below 0!")
-                print("")
+                time.sleep(.5)
+                if CurrentCombat.PTenemyCurrentHP <= 0:
+                    print("You defeated the", EnemySelect.name)
+                    break
+                else:
+                    print("The", EnemySelect.name + "'s health falls to", str(CurrentCombat.PTenemyCurrentHP) + "!")
+                    if CurrentCombat.PTenemyCurrentAP <= 0:
+                        print("The", EnemySelect.name, "is exhausted!")
+                    elif CurrentCombat.PTplayerCurrentAP <= 0:
+                        print("You are exhausted!")
+                    break
             break
 #================================================================================================
     #defines enemy turn (which is essentially the same, with choices being determined randomly)
@@ -314,26 +336,34 @@ def CombatSim():
             print("You became confused, gather your thoughts.")
             print("")
 
-        CurrentCombat.enemyHP = CurrentCombat.enemyHP + EnemySelectedMove.UserHPDamage
-        CurrentCombat.enemyAP = CurrentCombat.enemyAP + EnemySelectedMove.UserAPDamage
-        CurrentCombat.playerHP = CurrentCombat.playerHP + EnemySelectedMove.OpponentHPDamage
-        CurrentCombat.playerAP = CurrentCombat.playerAP + EnemySelectedMove.OpponentHPDamage
+        CurrentCombat.ETenemyCurrentHP = CurrentCombat.PTenemyCurrentHP + EnemySelectedMove.UserHPDamage
+        CurrentCombat.ETenemyCurrentAP = CurrentCombat.PTenemyCurrentAP + EnemySelectedMove.UserAPDamage
+        CurrentCombat.ETplayerCurrentHP = CurrentCombat.PTplayerCurrentHP + EnemySelectedMove.OpponentHPDamage
+        CurrentCombat.ETplayerCurrentAP = CurrentCombat.PTplayerCurrentAP + EnemySelectedMove.OpponentHPDamage
+        while True:
+            print("Enemy used", EnemySelectedMove.name)
+            print("")
+            time.sleep(.5)
+            if CurrentCombat.ETplayerCurrentHP <= 0:
+                print("You are dead.")
+                break
+            else:
+                print("Your health falls to", str(CurrentCombat.ETplayerCurrentHP) + "!")
+                if CurrentCombat.ETenemyCurrentAP <= 0:
+                    print("The", EnemySelect.name, "is exhausted!")
+                    break
+                elif CurrentCombat.ETplayerCurrentAP <= 0:
+                    print("You are exhausted!")
+                    break
+            break
 
-        print("Enemy used", EnemySelectedMove.name)
-        time.sleep(.5)
-        if CurrentCombat.playerHP >= 0:
-            print("Your health falls to", str(CurrentCombat.playerHP) + "!")
-            print("")
-        elif CurrentCombat.playerHP < 0:
-            print("Your health falls below 0!")
-            print("")
 #---------------------------------------------------------------------------------------
     #framework that utilizes and calls the actor turns to create the combat sim
     global PlayerInitiateCombatInput
     global EnemySelect
     EnemySelect = items.npc0001
     print("A ", EnemySelect.name, "appears!\n")
-    PlayerInitiateCombatInput = input("Will you Fight or flee? >>")
+    PlayerInitiateCombatInput = input("Fight or flee? >>")
 
     while True:
         #player may try to evade the combatant
@@ -348,38 +378,50 @@ def CombatSim():
                 PlayerInitiateCombatInput = 'fight'
 
         elif PlayerInitiateCombatInput == 'fight':
-            playerAPReset = CurrentCombat.playerAP
-            enemyAPReset = CurrentCombat.enemyAP
             while True:
-                CurrentCombat.playerAP = playerAPReset
-                CurrentCombat.enemyAP = enemyAPReset
                 if CurrentCombat.playerHP <= 0:
-                    print("You are dead.")
                     break
-                elif CurrentCombat.playerAP <= 0 <= CurrentCombat.playerHP:
+                elif CurrentCombat.ETplayerCurrentAP <= 0 <= CurrentCombat.ETplayerCurrentHP:
                     print("You do not have enough stamina to fight")
-                elif CurrentCombat.enemyHP <= 0:
-                    break
-                else:
-                    PlayerTurn()
-
-                if CurrentCombat.enemyAP <= 0 <= CurrentCombat.playerHP:
-                    print('The enemy is exhausted')
-                    print("")
+                    EnemyTurn()
+                    CurrentCombat.playerHP = CurrentCombat.ETplayerCurrentHP
+                    CurrentCombat.playerAP = CurrentCombat.ETenemyCurrentAP
+                    CurrentCombat.enemyHP = CurrentCombat.ETenemyCurrentHP
+                    CurrentCombat.enemyAP = CurrentCombat.ETenemyCurrentAP
                     continue
 
-                elif CurrentCombat.enemyHP <= 0:
-                    print('The enemy is Dead...')
+                elif CurrentCombat.PTenemyCurrentHP >= 0 >= CurrentCombat.PTenemyCurrentAP:
+                    print('The enemy can not continue (AP - 1)')
+                    PlayerTurn()
+
+                elif CurrentCombat.PTenemyCurrentHP <= 0:
                     break
 
-                else:
-                    EnemyTurn()
-        else:
-            print("You became confused, gather your thoughts")
+                elif CurrentCombat.ETplayerCurrentHP and CurrentCombat.ETenemyCurrentAP >= 0:
+                    PlayerTurn()
 
-        time.sleep(.5)
-        print("Battle over")
-        break
+                    if CurrentCombat.PTenemyCurrentHP and CurrentCombat.PTenemyCurrentAP >= 0:
+                        EnemyTurn()
+                        CurrentCombat.playerHP = CurrentCombat.ETplayerCurrentHP
+                        CurrentCombat.playerAP = CurrentCombat.ETenemyCurrentAP
+                        CurrentCombat.enemyHP = CurrentCombat.ETenemyCurrentHP
+                        CurrentCombat.enemyAP = CurrentCombat.ETenemyCurrentAP
+
+                    elif CurrentCombat.PTplayerCurrentHP >= 0 >= CurrentCombat.PTenemyCurrentAP:
+                        print('The enemy can not continue (AP - 2)')
+                        PlayerTurn()
+
+                    elif CurrentCombat.PTenemyCurrentHP <= 0:
+                        break
+
+
+
+                else:
+                    print('error')
+
+            print("Battle over")
+            break
+
 
 
 #=======================================================================================================================
@@ -491,9 +533,133 @@ def RecoverSave():
 
 
 #=======================================================================================================================
-#WorkingCode============================================================================================================
-def WorkingCode():
-    print("Working Code")
+class Board(list):
+
+    def __str__(self):
+        return "\n".join(" ".join(row) for row in self)
+
+
+class Game(object):
+
+    MARKER_X = "X"
+    MARKER_O = "O"
+    CTRLS = [
+        "left",
+        None,
+        "right",
+        "up",
+        None,
+        "down",
+    ]
+    EXIT = "stop"
+    START = [0, 0]
+    DEFAULT = [["O"] * 6 for _ in range(6)]
+
+    def __init__(self):
+        self.flag = True
+        self.arena = Board(Game.DEFAULT)
+        self.curr_pos = Game.START[:]
+        self.prev_pos = Game.START[:]
+        self.move_player()
+
+    def move_player(self):
+        px, py = self.prev_pos
+        cx, cy = self.curr_pos
+        if (0 <= cx <= 3) and (0 <= cy <= 5):
+            self.arena[py][px] = Game.MARKER_O
+            self.arena[cy][cx] = Game.MARKER_X
+
+        else:
+            print("Please enter a proper direction.")
+            self.curr_pos = self.prev_pos[:]
+            self.move_player()
+    def play(self):
+
+        print("You are at 0,0")
+        while self.flag:
+            ctrl = input("Move left, right, up, down, or stop?").lower()
+            if ctrl in Game.CTRLS:
+                d = Game.CTRLS.index(ctrl)
+                self.prev_pos = self.curr_pos[:]
+                self.curr_pos[d > 2] += d - (1 if d < 3 else 4)
+                self.move_player()
+                print(self.curr_pos)
+                if self.curr_pos == [1, 0]:
+                  while self.flag:
+                    print("You walk face first into a wall, and turn back to the center of the room")
+                    self.curr_pos = self.prev_pos[:]
+                    self.move_player()
+                    print(self.curr_pos)
+                    break
+                #elif self.curr_pos == [0,1]:
+                  #while self.flag:
+                    #CombatSim()
+                    #self.curr_pos = self.prev_pos[:]
+                    #self.move_player()
+                    #print(self.curr_pos)
+                    #break
+                elif self.curr_pos == [1, 1]:
+                    while self.flag:
+                        print("You walk face first into a wall, and turn back to the center of the room")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        print(self.curr_pos)
+                        break
+                elif self.curr_pos == [0, 2]:
+                    while self.flag:
+                        print("as you walk into the room, you note a large door on one end, a pit on the other and"
+                              "a staircase in front of you")
+                        break
+                elif self.curr_pos == [2, 2]:
+                    while self.flag:
+                        print("Congratulations! You made it out of the dungeon!,"
+                              "Get Ready for the full product, THULE, coming soon!")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        self.flag = False
+
+                        break
+                elif self.curr_pos == [3, 1]:
+                    while self.flag:
+                        print("You walk face first into a wall, and turn back to the center of the room")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        print(self.curr_pos)
+                        break
+                elif self.curr_pos == [3, 2]:
+                    while self.flag:
+                        print("You almost slip and fall into a chasm,"
+                              "You catch yourself and return to the center of the room")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        print(self.curr_pos)
+                        break
+                elif self.curr_pos == [1, 5]:
+                    while self.flag:
+                        print("Wishing to be one with the waterfall,"
+                              "you almost walk off the edge of the platform,"
+                              "you regain your senses and return to the center of the room")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        print(self.curr_pos)
+                        break
+                elif self.curr_pos == [0, 5]:
+                    while self.flag:
+                        print("Amazed by the gorgeous waterfall,"
+                              "you almost walk off the platform you were standing on,"
+                              "you catch yourself and return to the center of the room ")
+                        self.curr_pos = self.prev_pos[:]
+                        self.move_player()
+                        print(self.curr_pos)
+                        break
+            elif ctrl == Game.EXIT:
+                self.flag = False
+            else:
+                print("Please enter a proper direction.")
+
+my_game = Game()
+
+
 
 
 
