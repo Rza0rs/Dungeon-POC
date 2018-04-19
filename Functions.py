@@ -5,6 +5,7 @@ import items
 import random
 import time
 import pathlib
+from threading import Timer
 import _pickle as pickle
 #=======================================================================================================================
 #StartGame==============================================================================================================
@@ -33,7 +34,6 @@ def playerCreate():
         global playerOwnedWeapons
         global playerOwnedApperal
         global playerOwnedAccessories
-        global playerOwnedItems
         global playerEquippedWeapons
         global playerEquippedArmour
         global playerEquippedAccessories
@@ -71,10 +71,6 @@ def playerCreate():
                                                               acc1 = items.ac0001,
                                                               acc2 = items.none,
                                                               acc3 = items.none)
-            playerOwnedItems = classes.ownedItems(type = 'itemsd',
-                                                  item1 = items.it0001,
-                                                  item2 = items.none,
-                                                  item3 = items.none)
             playerEquippedWeapons = classes.equippedWeapons(type = 'Weapons',
                                                             primary = items.hw0001)
             playerEquippedArmour = classes.equippedArmour(type = 'armour',
@@ -116,10 +112,6 @@ def playerCreate():
                                                               acc1 = items.ac0002,
                                                               acc2 = items.none,
                                                               acc3 = items.none)
-            playerOwnedItems = classes.ownedItems(type = 'itemsd',
-                                                  item1 = items.it0002,
-                                                  item2 = items.none,
-                                                  item3 = items.none)
             playerEquippedWeapons = classes.equippedWeapons(type = 'Weapons',
                                                             primary = items.lw0001)
             playerEquippedArmour = classes.equippedArmour(type = 'armour',
@@ -132,10 +124,10 @@ def playerCreate():
             playerEquippedItems = classes.beltItems(type = 'items',
                                                     pouch1 = items.it0002,
                                                     pouch2 = items.none,
-                                                    pouch3=items.none,
-                                                    pouch4=items.none,
-                                                    pouch5=items.none,
-                                                    pouch6=items.none,)
+                                                    pouch3=items.noneItems,
+                                                    pouch4=items.noneItems,
+                                                    pouch5=items.noneItems,
+                                                    pouch6=items.noneItems,)
             break
         elif subclassInput == 'mage':  #assigns the player's starting equipment/stats based on class selection
             player = classes.pc(name=nameInput,
@@ -160,10 +152,6 @@ def playerCreate():
                                                               acc1 = items.ac0003,
                                                               acc2 = items.none,
                                                               acc3 = items.none)
-            playerOwnedItems = classes.ownedItems(type = 'itemsd',
-                                                  item1 = items.it0002,
-                                                  item2 = items.none,
-                                                  item3 = items.none)
             playerEquippedWeapons = classes.equippedWeapons(type = 'Weapons',
                                                             primary = items.mw0001)
 
@@ -216,38 +204,124 @@ def CombatSim():
 
                     # assigns an item to a variable based on player input
                     if ItemSelect == '1':
-                        PlayerSelectedItem = playerEquippedItems.pouch1
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch1.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch1.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch1.count = playerEquippedItems.pouch1.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch1.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch1.count == 0:
+                            playerEquippedItems.pouch1 = items.noneItems
+
                         break
                     elif ItemSelect == '2':
-                        PlayerSelectedItem = playerEquippedItems.pouch2
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch2.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch2.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch2.count = playerEquippedItems.pouch2.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch1.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch2.count == 0:
+                            playerEquippedItems.pouch2 = items.noneItems
+
                         break
                     elif ItemSelect == '3':
-                        PlayerSelectedItem = playerEquippedItems.pouch3
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch3.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch3.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch3.count = playerEquippedItems.pouch3.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch1.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch3.count == 0:
+                            playerEquippedItems.pouch3 = items.noneItems
+
                         break
                     elif ItemSelect == '4':
-                        PlayerSelectedItem = playerEquippedItems.pouch4
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch4.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch4.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch4.count = playerEquippedItems.pouch4.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch4.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch4.count == 0:
+                            playerEquippedItems.pouch4 = items.noneItems
+
                         break
                     elif ItemSelect == '5':
-                        PlayerSelectedItem = playerEquippedItems.pouch5
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch5.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch5.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch5.count = playerEquippedItems.pouch5.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch5.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch5.count == 0:
+                            playerEquippedItems.pouch5 = items.noneItems
+
                         break
                     elif ItemSelect == '6':
-                        PlayerSelectedItem = playerEquippedItems.pouch6
+                        # Framework for the effect of items on player and enemy HP and AP stats
+                        CurrentCombat.enemyHP = CurrentCombat.enemyHP
+                        CurrentCombat.enemyAP = CurrentCombat.enemyAP
+                        CurrentCombat.playerHP = CurrentCombat.playerHP + playerEquippedItems.pouch6.effect.PlayerHPRegen
+                        CurrentCombat.playerAP = CurrentCombat.playerAP + playerEquippedItems.pouch6.effect.PlayerAPRegen
+
+                        playerEquippedItems.pouch6.count = playerEquippedItems.pouch6.count - 1
+
+                        print("")
+                        print("You used", playerEquippedItems.pouch6.name + "!")
+                        print("")
+                        print("Your HP is now", CurrentCombat.playerHP)
+                        print("Your AP is now", CurrentCombat.playerAP)
+
+                        if playerEquippedItems.pouch6.count == 0:
+                            playerEquippedItems.pouch6 = items.noneItems
+
                         break
                     else:
                         print("You became confused, gather your thoughts.")  #catches player input errors and offers another try
                         print("")
 
-                # Framework for the effect of items on player and enemy HP and AP stats
-                CurrentCombat.enemyHP = CurrentCombat.enemyHP
-                CurrentCombat.enemyAP = CurrentCombat.enemyAP
-                CurrentCombat.playerHP = CurrentCombat.playerHP + PlayerSelectedItem.effect.PlayerHPRegen
-                CurrentCombat.playerAP = CurrentCombat.playerAP + PlayerSelectedItem.effect.PlayerAPRegen
 
-                print("")
-                print("You used", PlayerSelectedItem.name + "!")
-                print("")
-                print("Your HP is now", CurrentCombat.playerHP)
-                print("Your AP is now", CurrentCombat.playerAP)
                 break
 
             elif ActionSelect == 'engage':
@@ -333,9 +407,10 @@ def CombatSim():
     global EnemySelect
     EnemySelect = items.npc0001
     print("A ", EnemySelect.name, "appears!\n")
-    PlayerInitiateCombatInput = input("Will you Fight or flee? >>")
+
 
     while True:
+        PlayerInitiateCombatInput = input("Will you Fight or flee? >>")
         #player may try to evade the combatant
         if PlayerInitiateCombatInput == 'flee':
             print('You attempt to flee')
@@ -346,6 +421,7 @@ def CombatSim():
             else:
                 print("You are not fast enough, and the enemy blocks your path")
                 PlayerInitiateCombatInput = 'fight'
+                continue
 
         elif PlayerInitiateCombatInput == 'fight':
             playerAPReset = CurrentCombat.playerAP
@@ -376,6 +452,7 @@ def CombatSim():
                     EnemyTurn()
         else:
             print("You became confused, gather your thoughts")
+            continue
 
         time.sleep(.5)
         print("Battle over")
@@ -441,32 +518,84 @@ def WriteToJournal():
     JournalFile.write(JournalUpdatedContent)  #Overwrites old file with updated file containing new addition
 
     JournalFile.close()
+#=======================================================================================================================
+def Puzzle():
 
+    print('1: Precisely one of these statements is untrue\n',
+
+          '2: Precisely two of these statements are untrue\n',
+
+          '3: Precisely three of these statements are untrue\n',
+
+          '4: Precisely four of these statements are untrue\n',
+
+          '5: Precisely five of these statements are untrue\n',
+
+          '6: Precisely six of these statements are untrue\n',
+
+          '7: Precisely seven of these statements are untrue\n',
+
+          '8: Precisely eight of these statements are untrue\n',
+
+          '9: Precisely nine of these statements are untrue\n',
+
+          '10: Precisely ten of these statements are untrue.\n')
+
+    #=================================================================================
+
+    #=================================================================================
+
+    while True:
+
+        timeout = 20
+
+        t = Timer(timeout, print, ['Times up. Try again'])
+
+        t.start()
+
+        rdl_dung = input('Which statement is true?, Answer with the number associated to statement. You have 20 seconds.\n')
+
+
+
+        if rdl_dung == '9':
+
+            print('The answer is statement 9, you have answered correctly.')
+
+            break
+
+        elif rdl_dung != '9':
+
+            print('You have answered incorrectly.Try again')
+
+        else:
+
+            t.cancel()
+
+            break
 #=======================================================================================================================
 #Save==============================================================================================================
 def Save():
     print("Saving...")
-    SaveFile = open('Save', 'wb')
-    SaveCatagoryList = [player, playerOwnedWeapons, playerOwnedApperal, playerOwnedAccessories, playerOwnedItems,
-                             playerEquippedWeapons, playerEquippedArmour, playerEquippedAccessories, playerEquippedItems]
+    SaveFile = open('Save', 'wb')  #opens the save file in 'write' mode
+    SaveCatagoryList = [player, playerOwnedWeapons, playerOwnedApperal, playerOwnedAccessories,
+                        playerEquippedWeapons, playerEquippedArmour, playerEquippedAccessories, playerEquippedItems]
 
 
     SaveListCountStart = 0
-    while SaveListCountStart < 9:
+    while SaveListCountStart < 8:  #a loop that saves a catagory the returns to beginning, and ending when all categories are saved
         SaveListCount = SaveListCountStart
-        pickle.dump(SaveCatagoryList[SaveListCount], SaveFile)
+        pickle.dump(SaveCatagoryList[SaveListCount], SaveFile)  #the categories are saved in a specific order
         print('Saving ', str(SaveCatagoryList[SaveListCount]) + "...")
         SaveListCountStart = SaveListCount + 1
         time.sleep(0.5)
 
 
 #==================================================================================================
-def RecoverSave():
+def RecoverSave():  #recovers the data saved on the save file
     global player
     global playerOwnedWeapons
     global playerOwnedApperal
     global playerOwnedAccessories
-    global playerOwnedItems
     global playerEquippedWeapons
     global playerEquippedArmour
     global playerEquippedAccessories
@@ -475,13 +604,14 @@ def RecoverSave():
     print("Recovering save file... ")
 
     SaveFile = open('Save', 'rb')
+
+    #reads and assigns the data off of the save file in the correct order
     while True:
         try:
             player = pickle.load(SaveFile)
             playerOwnedWeapons = pickle.load(SaveFile)
             playerOwnedApperal = pickle.load(SaveFile)
             playerOwnedAccessories = pickle.load(SaveFile)
-            playerOwnedItems = pickle.load(SaveFile)
             playerEquippedWeapons = pickle.load(SaveFile)
             playerEquippedArmour = pickle.load(SaveFile)
             playerEquippedAccessories = pickle.load(SaveFile)
@@ -503,10 +633,6 @@ class Board(list):
 
         return "\n".join(" ".join(row) for row in self)
 
-
-
-
-
 class Game(object):
 
 
@@ -517,17 +643,17 @@ class Game(object):
 
     CTRLS = [
 
-        "left",
+        "west",
 
         None,
 
-        "right",
+        "east",
 
-        "up",
+        "north",
 
         None,
 
-        "down",
+        "south",
 
     ]
 
@@ -583,7 +709,7 @@ class Game(object):
 
         while self.flag:
 
-            ctrl = input("Move left, right, up, down, or stop?").lower()
+            ctrl = input("Move west, east, north, south, or stop?").lower()
 
             if ctrl in Game.CTRLS:
 
@@ -599,31 +725,31 @@ class Game(object):
 
                 if self.curr_pos == [1, 0]:
 
-                  while self.flag:
+                    while self.flag:
 
-                    print("You walk face first into a wall, and turn back to the center of the room")
+                        print("You walk face first into a wall, and turn back to the center of the room")
 
-                    self.curr_pos = self.prev_pos[:]
+                        self.curr_pos = self.prev_pos[:]
 
-                    self.move_player()
+                        self.move_player()
 
-                    print(self.curr_pos)
+                        print(self.curr_pos)
 
-                    break
+                        break
 
-                #elif self.curr_pos == [0,1]:
+                elif self.curr_pos == [0, 1]:
 
-                  #while self.flag:
+                    while self.flag:
 
-                    #CombatSim()
+                        CombatSim()
 
-                    #self.curr_pos = self.prev_pos[:]
+                        self.curr_pos = self.curr_pos[:]
 
-                    #self.move_player()
+                        self.move_player()
 
-                    #print(self.curr_pos)
+                        print(self.curr_pos)
 
-                    #break
+                        break
 
                 elif self.curr_pos == [1, 1]:
 
@@ -638,6 +764,28 @@ class Game(object):
                         print(self.curr_pos)
 
                         break
+                elif self.curr_pos == [1, 2]:
+
+                    while self.flag:
+
+                        if (playerEquippedItems.pouch1 == items.it0003) or (playerEquippedItems.pouch2 == items.it0003) or (playerEquippedItems.pouch3 == items.it0003):
+                            print("You use the key you found to open the door")
+                            self.curr_pos = self.curr_pos
+                        else:
+                            print("The door is locked")
+                            self.curr_pos = self.prev_pos[:]
+                            print(self.curr_pos)
+
+                            break
+
+                        print("You see a room full of treasure")
+
+                        d = Game.CTRLS.index(ctrl)
+
+                        self.prev_pos = self.curr_pos[:]
+
+                        break
+
 
                 elif self.curr_pos == [0, 2]:
 
@@ -646,7 +794,6 @@ class Game(object):
                         print("as you walk into the room, you note a large door on one end, a pit on the other and"
 
                               "a staircase in front of you")
-
                         break
 
                 elif self.curr_pos == [2, 2]:
@@ -690,6 +837,20 @@ class Game(object):
                               "You catch yourself and return to the center of the room")
 
                         self.curr_pos = self.prev_pos[:]
+
+                        self.move_player()
+
+                        print(self.curr_pos)
+
+                        break
+
+                elif self.curr_pos == [1, 4]:
+
+                    while self.flag:
+
+                        CombatSim()
+
+                        self.curr_pos = self.curr_pos[:]
 
                         self.move_player()
 
