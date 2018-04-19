@@ -143,6 +143,10 @@ mv0013 = classes.move(name="Arrow",
                       UserAPDamage=-5)
 
 # Effects====================================================================
+ef0000 = classes.effect(name='none',
+                        PlayerHPRegen=0,
+                        PlayerAPRegen=0)
+
 ef0001 = classes.effect(name='Heal',
                         PlayerHPRegen=+20,
                         PlayerAPRegen=0)
@@ -314,7 +318,8 @@ it0001 = classes.items(ID='it0001',
 
                        desc='a weak health potion',
 
-                       effect=ef0001)
+                       effect=ef0001,
+                       count = 1)
 
 it0002 = classes.items(ID='it0001',
 
@@ -326,7 +331,21 @@ it0002 = classes.items(ID='it0001',
 
                        desc='a weak mana potion',
 
-                       effect=ef0002)
+                       effect=ef0002,
+                       count = 1)
+
+it0003 = classes.items(ID='it0003',
+
+                       name='Treasure Room Key',
+
+                       weight=0,
+
+                       value=0,
+
+                       desc='key for opening locked door',
+
+                       effect= "none",
+                       count = 1)
 
 # Currency======================================================================
 
@@ -576,5 +595,12 @@ none = classes.item(ID='none',
                     weight=0,
                     value=0,
                     desc='empty slot')
+noneItems = classes.items(ID='none',
+                    name='none',
+                    weight=0,
+                    value=0,
+                    desc='empty slot',
+                    effect = ef0000,
+                    count = 1)
 #===============================================================================
 # NOTE: if you wanna add quest items and such they'll go here

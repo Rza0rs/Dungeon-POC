@@ -2,7 +2,7 @@
 # Inventory==================================================================================
 
 class inventory():
-    'the organization of items held by the player'
+    """the organization of items held by the player"""
 
     def __init__(self, type):
         self.type = type
@@ -31,19 +31,6 @@ class ownedArmour(inventory):
         self.armour2 = armour2
 
         self.armour3 = armour3
-
-        super().__init__(type)
-
-
-class ownedItems(inventory):
-
-    def __init__(self, type, item1, item2, item3):
-
-        self.item1 = item1
-
-        self.item2 = item2
-
-        self.item3 = item3
 
         super().__init__(type)
 
@@ -118,7 +105,7 @@ class beltItems(inventory):
 # item classes=================================================================================
 
 class item():
-    'objects that can be held by player characters or npcs'
+    """objects that can be held by player characters or npcs"""
 
     def __init__(self, ID, name, weight, value, desc):
         self.ID = ID
@@ -134,7 +121,7 @@ class item():
 # ==============================================================================================
 
 class currency(item):
-    'The currency in the world of Thule.'
+    """The currency in the world of Thule."""
 
     def __init__(self, ID, name, weight, value, desc):
         super().__init__(ID, name, weight, value, desc)
@@ -199,7 +186,7 @@ class weapon(item):
 
 
 class heavyWeapon(weapon):
-    'heavy weapons'
+    """heavy weapons"""
 
     def __init__(self, ID, name, weight, value, desc, weaponClass, effects, move1, move2, move3, StrReq, DexReq,
                  IntReq):
@@ -208,7 +195,7 @@ class heavyWeapon(weapon):
 
 
 class lightWeapon(weapon):
-    'light weapons'
+    """light weapons"""
 
     def __init__(self, ID, name, weight, value, desc, weaponClass, effects, move1, move2, move3, StrReq, DexReq,
                  IntReq):
@@ -217,7 +204,7 @@ class lightWeapon(weapon):
 
 
 class magicWeapon(weapon):
-    'magic weapons'
+    """magic weapons"""
 
     def __init__(self, ID, name, weight, value, desc, weaponClass, effects, move1, move2, move3, StrReq, DexReq,
                  IntReq):
@@ -228,7 +215,7 @@ class magicWeapon(weapon):
 # apparel classes---------------------------------------------------------------------------------
 
 class apparel(item):
-    'apparel'
+    """apparel"""
 
     def __init__(self, ID, name, weight, value, desc, apparelClass, defense, effects):
         self.apparelClass = apparelClass
@@ -256,14 +243,14 @@ class apparel(item):
 
 
 class heavyArmour(apparel):
-    'heavy armour'
+    """heavy armour"""
 
     def __init__(self, ID, name, weight, value, desc, apparelClass, defense, effects):
         super().__init__(ID, name, weight, value, desc, apparelClass, defense, effects)
 
 
 class lightArmour(apparel):
-    'light armour'
+    """light armour"""
 
     def __init__(self, ID, name, weight, value, desc, apparelClass, defense, effects):
         super().__init__(ID, name, weight, value, desc, apparelClass, defense, effects)
@@ -281,7 +268,7 @@ class clothing(apparel):
 # Accessories==================================================================================
 
 class accessories(item):
-    'accessories'
+    """accessories"""
 
     def __init__(self, ID, name, weight, value, desc, accClass, statEffect):
         self.accClass = accClass
@@ -309,10 +296,11 @@ class accessories(item):
 # Items========================================================================================
 
 class items(item):
-    'items'
+    """items"""
 
-    def __init__(self, ID, name, weight, value, desc, effect):
+    def __init__(self, ID, name, weight, value, desc, effect, count):
         self.effect = effect
+        self.count = count
 
         super().__init__(ID, name, weight, value, desc)
 
@@ -333,7 +321,7 @@ class items(item):
 # actor classes================================================================================
 
 class actor():
-    'actors'
+    """actors"""
 
     def __init__(self, name, level, essential, HP, AP):
         self.name = name
@@ -350,7 +338,7 @@ class actor():
 # ----------------------------------------------------------------------------------------------
 
 class pc(actor):
-    'the player character'
+    """the player character"""
 
     def __init__(self, name, subclass, level, HP, AP, Str, Dex, Int, essential, location):
         self.location = location
@@ -385,7 +373,7 @@ class pc(actor):
 # -----------------------------------------------------------------------------------------------
 
 class npc(actor):
-    'non-player characters'
+    """non-player characters"""
 
     def __init__(self, name, level, desc, essential, hostile, HP, AP, move1, move2, move3):
         self.hostile = hostile
@@ -427,28 +415,12 @@ class effect():
 #============================================================`=================================
 class combat():
     """combat"""
-    def __init__(self, playerHP, playerAP, enemyHP, enemyAP,
-                 PTplayerCurrentHP, PTplayerCurrentAP, PTenemyCurrentHP, PTenemyCurrentAP,
-                 ETplayerCurrentHP, ETplayerCurrentAP, ETenemyCurrentHP, ETenemyCurrentAP,
-                 playerCanFightHP, playerCanFightAP, enemyCanFightHP, enemyCanFightAP):
+    def __init__(self, playerHP, playerAP, enemyHP, enemyAP,):
 
         self.playerHP = playerHP
         self.playerAP = playerAP
         self.enemyHP = enemyHP
         self.enemyAP = enemyAP
 
-        self.PTplayerCurrentHP = PTplayerCurrentHP
-        self.PTplayerCurrentAP = PTplayerCurrentAP
-        self.PTenemyCurrentHP = PTenemyCurrentHP
-        self.PTenemyCurrentAP = PTenemyCurrentAP
 
-        self.ETplayerCurrentHP = ETplayerCurrentHP
-        self.ETplayerCurrentAP = ETplayerCurrentAP
-        self.ETenemyCurrentHP = ETenemyCurrentHP
-        self.ETenemyCurrentAP = ETenemyCurrentAP
-
-        self.playerCanFightHP = playerCanFightHP
-        self.playerCanFightAP = playerCanFightAP
-        self.enemyCanFightHP = enemyCanFightHP
-        self.enemyCanFightAP = enemyCanFightAP
 
