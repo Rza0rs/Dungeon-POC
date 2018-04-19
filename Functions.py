@@ -456,6 +456,7 @@ def CombatSim():
 
         time.sleep(.5)
         print("Battle over")
+        player.HP = CurrentCombat.playerHP
         break
 
 
@@ -743,9 +744,6 @@ class Game(object):
 
                         CombatSim()
 
-                        self.curr_pos = self.curr_pos[:]
-
-                        self.move_player()
 
                         print(self.curr_pos)
 
@@ -854,6 +852,15 @@ class Game(object):
 
                         self.move_player()
 
+                        print(self.curr_pos)
+
+                        break
+
+                elif self.curr_pos == [2,4]:
+                    while self.flag:
+                        print("as you step into the room, you notice the floor is covered in mystic healing scrawls,"
+                              "you feel healthier")
+                        player.HP = player.HP+50
                         print(self.curr_pos)
 
                         break
