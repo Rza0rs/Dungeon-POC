@@ -685,7 +685,7 @@ class Game(object):
 
         cx, cy = self.curr_pos
 
-        if (0 <= cx <= 3) and (0 <= cy <= 5):
+        if (0 <= cx < 3) and (0 <= cy <= 5):
 
             self.arena[py][px] = Game.MARKER_O
 
