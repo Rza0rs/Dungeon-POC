@@ -2,15 +2,15 @@ import classes
 
 # Moves======================================================================
 
-mv0000 = classes.move(name="Nothing",
+mv0000 = classes.move(name="Nothing",     #Creates a function for a move to be called upon later, sets name
 
-                      OpponentHPDamage=0,
+                      OpponentHPDamage=0,   #Sets damage done to opponent
 
-                      OpponentAPDamage=0,
+                      OpponentAPDamage=0,   #Sets damage done to stamina to opponent
 
-                      UserHPDamage=0,
+                      UserHPDamage=0,       #Sets damage done to user of the move
 
-                      UserAPDamage=0)
+                      UserAPDamage=0)       #Sets stamina required and used when the move is called upon
 
 mv0001 = classes.move(name="slash",
 
@@ -143,27 +143,23 @@ mv0013 = classes.move(name="Arrow",
                       UserAPDamage=-5)
 
 # Effects====================================================================
-ef0000 = classes.effect(name='none',
-                        PlayerHPRegen=0,
-                        PlayerAPRegen=0)
-
-ef0001 = classes.effect(name='Heal',
-                        PlayerHPRegen=+20,
-                        PlayerAPRegen=0)
+ef0001 = classes.effect(name='Heal',        #creates ID for effect to be called upon
+                        PlayerHPRegen=+20,      #Sets health gain/loss when item is used
+                        PlayerAPRegen=0)        #Sets stamina gain/loss when item is used
 
 ef0002 = classes.effect(name='ManaHeal',
                         PlayerHPRegen=0,
                         PlayerAPRegen=+20)
 # Armour=======================================================================
 
-ha0001 = classes.heavyArmour(ID='ha0001',
-                             name='Iron Armor',
-                             weight=10,
-                             value=100,
-                             desc='A simple set of iron armor',
-                             apparelClass='heavy',
-                             defense=10,
-                             effects='none')
+ha0001 = classes.heavyArmour(ID='ha0001',       #Creates function for armor to be called upon later
+                             name='Iron Armor',     #Specifies name of armor
+                             weight=10,     #Sets weight of armor
+                             value=100,     #Sets value of armor incase of it being sold
+                             desc='A simple set of iron armor',     #Description
+                             apparelClass='heavy',  #Weight class of armor, possible debuffs later
+                             defense=10,    #Defense, negation of damage
+                             effects='none')        #Effects given to use of armor
 la0001 = classes.lightArmour(ID='la0001',
                              name='Leather Armor',
                              weight=5,
@@ -184,31 +180,31 @@ cl0001 = classes.clothing(ID='cl0001',
 
 # Weapons======================================================================
 
-hw0001 = classes.heavyWeapon(ID='hw0001',
+hw0001 = classes.heavyWeapon(ID='hw0001',       #Created ID for weapon
 
-                             name='Iron Sword',
+                             name='Iron Sword',     #Specifies name
 
-                             weight=10,
+                             weight=10,     #Sets weight of wepon
 
-                             value=100,
+                             value=100,     #Sets value of wepon to be possible sold
 
-                             desc='A simple iron sword',
+                             desc='A simple iron sword',    #Description
 
-                             weaponClass='heavy',
+                             weaponClass='heavy',       #Specifies class of weapon
 
-                             effects='none',
+                             effects='none',        #Specifies if weapon has any special effects
 
-                             move1=mv0001,
+                             move1=mv0001,  #Sets moves that user can do when having the weapon equiped
 
                              move2=mv0002,
 
                              move3=mv0003,
 
-                             StrReq=10,
+                             StrReq=10,     #Sets Strength requirment for use of weapon
 
-                             DexReq=4,
+                             DexReq=4,      #Sets Dexterity requirment for use of weapon
 
-                             IntReq=0)
+                             IntReq=0)      #Sets Intelligence requirement for use of weapon
 
 lw0001 = classes.lightWeapon(ID='lw0001',
 
@@ -264,19 +260,19 @@ mw0001 = classes.magicWeapon(ID='mw0001',
 
 # Accessories==================================================================
 
-ac0001 = classes.accessories(ID='ac0001',
+ac0001 = classes.accessories(ID='ac0001',   #Creates ID for accessory
 
-                             name='ruby ring',
+                             name='ruby ring',  #Sets name of accessory
 
-                             weight=1,
+                             weight=1,      #Sets weight of accessory
 
-                             value=500,
+                             value=500,     #Sets value of accessory to possible be sold later
 
-                             desc='a silver ring with a ruby inside',
+                             desc='a silver ring with a ruby inside',   #Description
 
-                             accClass='ring',
+                             accClass='ring',   #Sets type of accesssory
 
-                             statEffect='+10 max hp')
+                             statEffect='+10 max hp')       #Specifies what effects the accessory gives to user
 
 ac0002 = classes.accessories(ID='ac0002',
 
@@ -308,18 +304,17 @@ ac0003 = classes.accessories(ID='ac0003',
 
 # Items========================================================================
 
-it0001 = classes.items(ID='it0001',
+it0001 = classes.items(ID='it0001',         #Creates ID
 
-                       name='health potion',
+                       name='health potion',        #Sets a name
 
-                       weight=2,
+                       weight=2,        #Sets weight of item
 
-                       value=250,
+                       value=250,       #Sets value of itme to possible be sold later
 
-                       desc='a weak health potion',
+                       desc='a weak health potion',     #Description
 
-                       effect=ef0001,
-                       count = 1)
+                       effect=ef0001)       #Specifies what effect item gives user upon use
 
 it0002 = classes.items(ID='it0001',
 
@@ -331,33 +326,19 @@ it0002 = classes.items(ID='it0001',
 
                        desc='a weak mana potion',
 
-                       effect=ef0002,
-                       count = 1)
-
-it0003 = classes.items(ID='it0003',
-
-                       name='Treasure Room Key',
-
-                       weight=0,
-
-                       value=0,
-
-                       desc='key for opening locked door',
-
-                       effect= "none",
-                       count = 1)
+                       effect=ef0002)
 
 # Currency======================================================================
 
-cu0001 = classes.currency(ID='cu0001',
+cu0001 = classes.currency(ID='cu0001',  #Sets ID for currency to be called upon later
 
-                          name='gold',
+                          name='gold',    #Specifies name of the currency
 
-                          weight=0,
+                          weight=0,     #Weight of a single 'gold'
 
-                          value=1,
+                          value=1,      #Worth of the currency
 
-                          desc='The common currency in the world of Thule.')
+                          desc='The common currency in the world of Thule.')    #Description
 
 cu0002 = classes.currency(ID='cu0002',
 
@@ -390,21 +371,21 @@ cu0004 = classes.currency(ID='cu0004',
                           desc='The blue of the Sapphire reflects the allure of the sky, making it popular in use for jewelry.')
 
 # Npc's=======================================================================
-npc0001 = classes.npc(name='Black Knight',
+npc0001 = classes.npc(name='Black Knight',      #Specifies name of NPC
 
-                      level=1,
+                      level=1,     #Sets base level
 
-                      desc='A well trained swordsman fighting for the Black faction.',
+                      desc='A well trained swordsman fighting for the Black faction.',  #Description
 
-                      essential='no',
+                      essential='no',       #Sets if NPC is essential or not(if it is essetial it can't die)
 
-                      hostile='yes',
+                      hostile='yes',        #Specifies if NPC is an enemy NPC
 
-                      HP=40,
+                      HP=40,        #Sets base Health stat of NPC
 
-                      AP=20,
+                      AP=20,        #Sets base Stamina stat of NPC
 
-                      move1=mv0001,
+                      move1=mv0001,     #Specifies which moves the NPc cna use in battle
 
                       move2=mv0003,
 
@@ -595,12 +576,5 @@ none = classes.item(ID='none',
                     weight=0,
                     value=0,
                     desc='empty slot')
-noneItems = classes.items(ID='none',
-                    name='none',
-                    weight=0,
-                    value=0,
-                    desc='empty slot',
-                    effect = ef0000,
-                    count = 1)
 #===============================================================================
 # NOTE: if you wanna add quest items and such they'll go here
